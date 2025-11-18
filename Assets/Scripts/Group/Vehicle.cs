@@ -7,7 +7,7 @@ public class Vehicle : MonoBehaviour, IMovable
     [SerializeField] private float _vehicleSpeed, _vehicleRotateSpeed;
 
     private PathDrawer _pathDrawer;
-
+    private GameObject _finishZone;
     public bool IsMoving { get; set; }
 
     private void Start()
@@ -36,7 +36,7 @@ public class Vehicle : MonoBehaviour, IMovable
     {
         if (!IsMoving)
         {
-            _pathDrawer.FinishDrawLine(this); 
+            _pathDrawer.FinishDrawLine(this, out _finishZone); 
         }
     }
 
@@ -66,6 +66,11 @@ public class Vehicle : MonoBehaviour, IMovable
                 yield return null;
             }
         }
-    }
 
+        _finishZone.TryGetComponent<FinishZone>(out FinishZone zone);
+        if(zone != null)
+        {
+            zone.VehicleArived(gameObject);
+        }
+    }
 }

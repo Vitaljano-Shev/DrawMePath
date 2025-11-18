@@ -41,7 +41,7 @@ public class PathDrawer : MonoBehaviour
         }
     }
 
-    public void FinishDrawLine(IMovable movableObj)
+    public void FinishDrawLine(IMovable movableObj, out GameObject finishZone)
     {
         Vector3 lastPos = GetScreenToWorldPoint(Input.mousePosition);
         lastPos.z = 0;
@@ -52,11 +52,13 @@ public class PathDrawer : MonoBehaviour
         {
             movableObj.Move(_currentLine);
             _currentLine = null;
+            finishZone = hit.gameObject;
         }
         else
         {
             Destroy(_currentLine.gameObject);
             _currentLine = null;
+            finishZone = null;
         }
     }
 
