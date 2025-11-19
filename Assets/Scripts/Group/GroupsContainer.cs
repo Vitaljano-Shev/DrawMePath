@@ -8,6 +8,8 @@ public class GroupsContainer : MonoBehaviour
     private int _correctGroupCount = 0, _finishedGroupCount;
     private void Start()
     {
+        LevelController.Instance.GroupsAmount = _groups.Count;
+
         if (_groups.Count > 0)
         {
             foreach (Group group in _groups)
@@ -25,9 +27,15 @@ public class GroupsContainer : MonoBehaviour
         if(_finishedGroupCount == _groups.Count)
         {
             if (_correctGroupCount == _finishedGroupCount)
+            {
                 Debug.Log("Level Completed");
+                LevelController.Instance.NextLevel();
+            }
             else
+            {
                 Debug.Log("Invalid Groups. Level incompled");
+                LevelController.Instance.RestartLevel();
+            }
         }
     }
 }

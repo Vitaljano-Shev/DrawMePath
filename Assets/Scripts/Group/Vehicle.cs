@@ -9,16 +9,18 @@ public class Vehicle : MonoBehaviour, IMovable
     private PathDrawer _pathDrawer;
     private GameObject _finishZone;
     public bool IsMoving { get; set; }
+    private bool _IsReady = true;
 
     private void Start()
     {
         _pathDrawer = FindAnyObjectByType<PathDrawer>();
-        IsMoving = false;
+        IsMoving = _IsReady = false;
+        gameObject.SetActive(true);
     }
 
     private void OnMouseDown()
     {
-        if (!IsMoving)
+        if (!IsMoving && !_IsReady)
         {
             _pathDrawer.StartDrawLine(_vehicleColor); 
         }
@@ -26,7 +28,7 @@ public class Vehicle : MonoBehaviour, IMovable
 
     private void OnMouseDrag()
     {
-        if (!IsMoving)
+        if (!IsMoving && !_IsReady)
         {
             _pathDrawer.AddPointToLine(); 
         }
@@ -34,9 +36,10 @@ public class Vehicle : MonoBehaviour, IMovable
 
     private void OnMouseUp()
     {
-        if (!IsMoving)
+        if (!IsMoving && !_IsReady)
         {
-            _pathDrawer.FinishDrawLine(this, out _finishZone); 
+            _pathDrawer.FinishDrawLine(this, out _finishZone);
+            _IsReady = true;
         }
     }
 

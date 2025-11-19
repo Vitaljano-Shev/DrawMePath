@@ -16,7 +16,7 @@ public class Group : MonoBehaviour
 
     public void CheckGroup(GameObject checkVehicle)
     {
-        _groupCorrect = (checkVehicle.GetInstanceID() == _vehicle.GetInstanceID());
+        _groupCorrect = (checkVehicle == _vehicle);
         _container.AddGroup(_groupCorrect);
     }
 }

@@ -50,7 +50,7 @@ public class PathDrawer : MonoBehaviour
 
         if(hit != null)
         {
-            movableObj.Move(_currentLine);
+            LevelController.Instance.PathReady(movableObj, _currentLine);
             _currentLine = null;
             finishZone = hit.gameObject;
         }
