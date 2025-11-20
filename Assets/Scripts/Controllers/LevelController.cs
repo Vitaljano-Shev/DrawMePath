@@ -37,7 +37,6 @@ public class LevelController : MonoBehaviour
         _movables.Add(movableObj, path);
         if (_pathReadyAmount == _groupsAmount)
         {
-            //MoveAllVehicles();
             _buttonsController.ShowMoveButton();
         }
     }
@@ -52,7 +51,7 @@ public class LevelController : MonoBehaviour
 
     public void VehicleDestroyed()
     {
-        Debug.Log("Vehicle destroyed. Restarting");
+        //Debug.Log("Vehicle destroyed. Restarting");
         RestartLevel();
     }
 

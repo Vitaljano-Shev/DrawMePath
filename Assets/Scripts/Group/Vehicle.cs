@@ -85,5 +85,6 @@ public class Vehicle : MonoBehaviour, IMovable, IDestroyable
     public void Die()
     {
         gameObject.SetActive(false);
+        LevelController.Instance.VehicleDestroyed();
     }
 }
