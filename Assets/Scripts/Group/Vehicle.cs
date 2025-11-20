@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour, IMovable
+public class Vehicle : MonoBehaviour, IMovable, IDestroyable
 {
     [SerializeField] private Color _vehicleColor;
     [SerializeField] private float _vehicleSpeed, _vehicleRotateSpeed;
@@ -75,5 +75,15 @@ public class Vehicle : MonoBehaviour, IMovable
         {
             zone.VehicleArived(gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Die();
+    }
+
+    public void Die()
+    {
+        gameObject.SetActive(false);
     }
 }
